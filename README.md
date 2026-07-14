@@ -1,7 +1,7 @@
-# Connect-Four-game
-Title
-cgfgf
-CONNECT FOUR PROGRAM
+## Connect Four Program Structure
+
+```text
+CONNECT FOUR GAME
 
 ├── Initialisation
 │
@@ -37,7 +37,8 @@ CONNECT FOUR PROGRAM
 │   └── draw_hover_piece()
 │       └── Shows preview piece
 │
-└── Main Loop
+└── Main Game Loop
     ├── Receive Events
     ├── Update Game State
     └── Draw Screen
+```
