@@ -180,28 +180,28 @@ def draw_ui():
         True,
         WHITE,
     )
-    screen.blit(moves_text, (700, 80))
+    screen.blit(moves_text, (650, 80))
 
     red_text = small_font.render(
         f"Red Wins: {red_wins}",
         True,
         RED,
     )
-    screen.blit(red_text, (650, 40))
+    screen.blit(red_text, (500, 40))
 
     yellow_text = small_font.render(
         f"Yellow Wins: {yellow_wins}",
         True,
         YELLOW,
     )
-    screen.blit(yellow_text, (650, 65))
+    screen.blit(yellow_text, (500, 65))
 
     draw_text = small_font.render(
         f"Draws: {draws}",
         True,
         WHITE,
     )
-    screen.blit(draw_text, (650, 90))
+    screen.blit(draw_text, (500, 90))
 
 
 def draw_board():
@@ -276,8 +276,8 @@ while running:
 
         if reset_button.clicked(event):
             reset_game()
-
-        if (
+        
+        elif (
             event.type == pygame.MOUSEBUTTONDOWN
             and event.button == 1
             and not game_over
