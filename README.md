@@ -83,3 +83,11 @@ CONNECT FOUR GAME
 - red_wins = 0 keeps track of how many games the Red player has won.
 - yellow_wins = 0 keeps track of how many games the Yellow player has won.
 - draws = 0 records the number of games that end without a winner.
+
+## Button Class
+
+The Button class creates a clickable button for the game. It stores the button’s position, size and text, draws the button on the screen, changes colour when the mouse hovers over it, and detects when the left mouse button is clicked inside the button area.
+
+## __init__() Method
+
+The __init__() method is the constructor for the Button class. It runs automatically whenever a new button object is created. Its purpose is to initialise the button's properties, including its position (x, y), size (w, h), and display text. It also creates a pygame.Rect object, which is used for drawing the button and detecting mouse interactions.
