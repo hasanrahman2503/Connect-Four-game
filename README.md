@@ -41,5 +41,5 @@ CONNECT FOUR GAME
     ├── Update Game State
     └── Draw Screen
 ```
-### How the code works
-## Settings
+## How the code works
+# Settings
