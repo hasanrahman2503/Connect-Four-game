@@ -108,6 +108,47 @@ The clicked() method checks whether the button has been clicked. It returns True
 
 If any of these conditions are not met, the method returns False. This allows the program to detect when the user clicks the button and perform an action, such as resetting the game.
 
+## Reset Game Function
+
+The `reset_game()` function resets the current game state so a new game can begin.
+
+```python
+def reset_game():
+    global board, current_player, winner, game_over, moves
+
+    board = [[0 for _ in range(COLS)] for _ in range(ROWS)]
+    current_player = 1
+    winner = None
+    game_over = False
+    moves = 0
+```
+
+- `global` allows the function to modify the existing game variables.
+- The board is recreated with all spaces set to `0`, removing all pieces.
+- `current_player` is reset to `1`, meaning Red starts again.
+- `winner` is cleared and `game_over` is set to `False` so the game can continue.
+- `moves` is reset to `0`.
+
+This function restarts the game while keeping the win and draw counters unchanged.
+
+## Get Next Row Function
+
+The `get_next_row()` function finds the lowest available position in a selected column where a new piece can be placed.
+
+```python
+def get_next_row(col):
+    for row in range(ROWS - 1, -1, -1):
+        if board[row][col] == 0:
+            return row
+    return None
+```
+
+- The function starts checking from the bottom of the column (`ROWS - 1`) because Connect Four pieces fall downwards.
+- It moves upwards through the column until it finds an empty space (`0`).
+- It returns the row number where the piece should be placed.
+- If the column is full, it returns `None`, preventing another piece from being added.
+  
+
 ## Reset Button Creation
 
 ```python
