@@ -42,6 +42,24 @@ CONNECT FOUR GAME
     └── Draw Screen
 ```
 # How the code works
+
+## Installation
+
+Before running the program, install the required Python library:
+
+```bash
+pip install pygame
+```
+
+The program uses:
+
+```python
+import pygame
+import sys
+```
+
+- `pygame` is an external library used to create the game window, draw graphics, handle user input, and manage the game loop. It must be installed using `pip`.
+- `sys` is a built-in Python module used to safely exit the program, so no installation is required.
 ## Settings
 - pygame.init() initializes all the Pygame modules so the program can use its features.
 - WIDTH and HEIGHT set the window size to 900 × 700 pixels.
@@ -368,3 +386,194 @@ The function then draws the corresponding coloured circle in that position.
 ---
 
 Overall, `draw_board()` converts the internal board array into a visual Connect Four grid by drawing empty slots and updating them with player pieces after each move.
+
+## Draw Hover Piece Function
+
+The `draw_hover_piece()` function displays a preview of the piece that will be dropped when the player moves their mouse over the game board. This helps the player see which column they are about to select.
+
+```python
+def draw_hover_piece():
+```
+
+### Checking Game State
+
+```python
+if game_over:
+    return
+```
+
+Checks whether the game has finished. If there is already a winner or the board is full, the function stops and does not display a hovering piece.
+
+---
+
+### Getting Mouse Position
+
+```python
+mouse_x = pygame.mouse.get_pos()[0]
+```
+
+Gets the current horizontal position of the mouse cursor. Only the x-coordinate is needed because the player chooses columns by moving left and right.
+
+---
+
+### Checking if Mouse is Over Board
+
+```python
+if BOARD_X <= mouse_x <= BOARD_X + BOARD_WIDTH:
+```
+
+Checks whether the mouse is currently above the Connect Four board area. If it is outside the board, no preview piece is displayed.
+
+---
+
+### Drawing the Preview Piece
+
+```python
+color = RED if current_player == 1 else YELLOW
+```
+
+Sets the colour of the preview piece based on whose turn it is.
+
+```python
+pygame.draw.circle(
+    screen,
+    color,
+    (mouse_x, BOARD_Y - 40),
+    CELL_SIZE // 2 - 8,
+)
+```
+
+Draws a coloured circle above the board showing where the player's piece will be placed when they click.
+
+---
+
+Overall, `draw_hover_piece()` improves the user interface by providing visual feedback and showing the player which column they are selecting before making a move.
+
+## Main Game Loop
+
+The main loop controls the running of the game. It continuously checks for user input, updates the game state, and redraws the screen until the player closes the window.
+
+```python
+while running:
+```
+
+The loop continues while the `running` variable is `True`.
+
+---
+
+### Controlling Game Speed
+
+```python
+clock.tick(FPS)
+```
+
+Limits the game to the set frames per second (`FPS = 60`), ensuring the game runs smoothly.
+
+---
+
+### Handling Events
+
+```python
+for event in pygame.event.get():
+```
+
+Checks for user actions such as closing the window, clicking the reset button, or placing a game piece.
+
+```python
+if event.type == pygame.QUIT:
+    running = False
+```
+
+Stops the game when the user closes the window.
+
+---
+
+### Reset Button
+
+```python
+if reset_button.clicked(event):
+    reset_game()
+```
+
+Checks whether the reset button has been clicked. If it has, the board is cleared and a new game begins.
+
+---
+
+### Player Move
+
+When the player clicks on the board:
+
+```python
+col = (mouse_x - BOARD_X) // CELL_SIZE
+```
+
+Calculates which column the player selected.
+
+```python
+row = get_next_row(col)
+```
+
+Finds the lowest available position in that column.
+
+```python
+board[row][col] = current_player
+```
+
+Places the player's piece onto the board.
+
+---
+
+### Checking Game Results
+
+After every move, the program checks whether the player has won:
+
+```python
+if check_win(current_player):
+```
+
+If four pieces are connected:
+
+- The winner is stored.
+- The game ends.
+- The appropriate win counter is increased.
+
+If the board is full:
+
+```python
+elif moves == ROWS * COLS:
+```
+
+The game ends as a draw and the draw counter increases.
+
+If nobody has won, the turn switches:
+
+```python
+current_player = 2 if current_player == 1 else 1
+```
+
+---
+
+### Updating the Display
+
+At the end of every loop:
+
+```python
+draw_ui()
+draw_board()
+draw_hover_piece()
+reset_button.draw(screen)
+pygame.display.flip()
+```
+
+These functions redraw the interface, board, hover piece, and button so the player sees the updated game state.
+
+---
+
+Finally:
+
+```python
+pygame.quit()
+sys.exit()
+```
+
+Closes Pygame and safely exits the program when the game loop ends.
