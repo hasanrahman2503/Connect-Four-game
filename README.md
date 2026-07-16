@@ -1,7 +1,7 @@
 ## Connect Four Program Structure
 
 CONNECT FOUR GAME
-
+```
 ├── Initialisation
 │
 ├── Button Class
