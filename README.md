@@ -43,7 +43,6 @@ CONNECT FOUR GAME
 ```
 # How the code works
 ## Settings
-
 pygame.init() initializes all the Pygame modules so the program can use its features.
 WIDTH and HEIGHT set the window size to 900 × 700 pixels.
 FPS = 60 sets the game to update at 60 frames per second for smooth gameplay.
