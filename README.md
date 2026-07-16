@@ -1,4 +1,4 @@
-## Connect Four Program Structure
+## Flow Chart
 
 CONNECT FOUR GAME
 ```
