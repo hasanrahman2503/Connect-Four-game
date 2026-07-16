@@ -108,6 +108,13 @@ The clicked() method checks whether the button has been clicked. It returns True
 
 If any of these conditions are not met, the method returns False. This allows the program to detect when the user clicks the button and perform an action, such as resetting the game.
 
+## Reset Button Creation
+
+```python
+reset_button = Button(WIDTH // 2 - 80, HEIGHT - 80, 160, 50, "Reset Game")
+```
+This line creates a Button object called reset_button. The button is positioned near the bottom centre of the game window, has a width of 160 pixels and a height of 50 pixels, and displays the text "Reset Game". The button is used to restart the game when clicked.
+
 ## Reset Game Function
 
 The `reset_game()` function resets the current game state so a new game can begin.
@@ -148,10 +155,216 @@ def get_next_row(col):
 - It returns the row number where the piece should be placed.
 - If the column is full, it returns `None`, preventing another piece from being added.
   
+## Check Win Function
 
-## Reset Button Creation
+The `check_win()` function checks whether a player has connected four pieces in a row. It checks all possible winning directions: horizontal, vertical, and both diagonal directions.
 
 ```python
-reset_button = Button(WIDTH // 2 - 80, HEIGHT - 80, 160, 50, "Reset Game")
+def check_win(piece):
 ```
-This line creates a Button object called reset_button. The button is positioned near the bottom centre of the game window, has a width of 160 pixels and a height of 50 pixels, and displays the text "Reset Game". The button is used to restart the game when clicked.
+
+The function takes the player's piece (`1` for Red or `2` for Yellow) and searches the board for four matching pieces.
+
+- **Horizontal check:** Searches each row for four connected pieces from left to right.
+- **Vertical check:** Searches each column for four connected pieces from top to bottom.
+- **Diagonal down-right check:** Checks diagonal lines going from top-left to bottom-right.
+- **Diagonal up-right check:** Checks diagonal lines going from bottom-left to top-right.
+
+If four matching pieces are found, the function returns `True`, meaning the player has won. If no winning combination is found, it returns `False`.
+
+## Draw UI Function
+
+The `draw_ui()` function is responsible for displaying all the information shown at the top of the game window. It updates the interface based on the current game state, such as whose turn it is, whether someone has won, or if the game has ended in a draw.
+
+```python
+def draw_ui():
+```
+
+### Background and Title
+
+```python
+screen.fill(BG)
+pygame.draw.rect(screen, PANEL, (0, 0, WIDTH, 120))
+```
+
+The screen is cleared with the background colour, and a top panel is drawn to hold the game information.
+
+```python
+title = title_font.render("Connect Four", True, WHITE)
+screen.blit(title, (25, 20))
+```
+
+Creates and displays the game title at the top-left corner.
+
+---
+
+### Displaying Current Turn
+
+```python
+if not game_over:
+```
+
+Checks if the game is still running.
+
+```python
+turn_name = "Red" if current_player == 1 else "Yellow"
+```
+
+Determines which player's turn it is based on the `current_player` variable.
+
+```python
+turn_text = ui_font.render(
+    f"Current Turn: {turn_name}",
+    True,
+    RED if current_player == 1 else YELLOW,
+)
+```
+
+Creates a text message showing the current player and changes the text colour depending on whether it is Red or Yellow's turn.
+
+---
+
+### Displaying Game Results
+
+When `game_over` becomes `True`, the function checks whether there is a winner.
+
+```python
+if winner:
+```
+
+If a player has won:
+
+- Displays **"RED WINS!"** if `winner == 1`.
+- Displays **"YELLOW WINS!"** if `winner == 2`.
+- Shows a message telling the player to press reset.
+
+If there is no winner:
+
+```python
+else:
+    msg = ui_font.render("DRAW GAME!", True, WHITE)
+```
+
+The game is a draw because the board is completely filled without a winning combination. A message is displayed telling the player to reset the game.
+
+---
+
+### Drawing
+
+```python
+moves_text = small_font.render(
+    f"Moves Played: {moves}",
+    True,
+    WHITE,
+)
+```
+
+Displays the total number of moves made in the current game.
+
+```python
+f"Red Wins: {red_wins}"
+f"Yellow Wins: {yellow_wins}"
+f"Draws: {draws}"
+```
+
+Displays the overall game statistics:
+
+- Number of Red wins.
+- Number of Yellow wins.
+- Number of draws.
+
+These counters remain after pressing reset, allowing the player to track results across multiple games.
+
+---
+
+Overall, `draw_ui()` keeps the player informed by updating the interface every frame based on the current game state.
+
+## Draw Board Function
+
+The `draw_board()` function is responsible for displaying the Connect Four board and all player pieces on the screen. It draws the blue board background, creates the empty slots, and places Red or Yellow pieces depending on the current board state.
+
+```python
+def draw_board():
+```
+
+### Drawing the Board Background
+
+```python
+pygame.draw.rect(
+    screen,
+    BOARD_BLUE,
+    (
+        BOARD_X,
+        BOARD_Y,
+        BOARD_WIDTH,
+        BOARD_HEIGHT,
+    ),
+    border_radius=10,
+)
+```
+
+Creates the main blue rectangle that represents the Connect Four board. The `border_radius` parameter gives the board rounded corners.
+
+---
+
+### Looping Through Board Positions
+
+```python
+for row in range(ROWS):
+    for col in range(COLS):
+```
+
+Uses nested loops to go through every position on the 6x7 grid.
+
+- The outer loop moves through each row.
+- The inner loop moves through each column.
+
+This allows the program to check every slot on the board.
+
+---
+
+### Calculating Piece Positions
+
+```python
+x = BOARD_X + col * CELL_SIZE + CELL_SIZE // 2
+y = BOARD_Y + row * CELL_SIZE + CELL_SIZE // 2
+```
+
+Calculates the centre position of each circle on the board. This ensures that every piece is drawn in the middle of its grid slot.
+
+---
+
+### Drawing Empty Slots
+
+```python
+pygame.draw.circle(
+    screen,
+    BLACK,
+    (x, y),
+    CELL_SIZE // 2 - 6,
+)
+```
+
+Draws black circles representing empty spaces where pieces can be placed.
+
+---
+
+### Drawing Player Pieces
+
+```python
+if board[row][col] == 1:
+```
+
+Checks if the position contains a Red piece.
+
+```python
+elif board[row][col] == 2:
+```
+
+Checks if the position contains a Yellow piece.
+
+The function then draws the corresponding coloured circle in that position.
+
+---
+
+Overall, `draw_board()` converts the internal board array into a visual Connect Four grid by drawing empty slots and updating them with player pieces after each move.
