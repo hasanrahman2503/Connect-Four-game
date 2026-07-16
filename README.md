@@ -52,23 +52,24 @@ CONNECT FOUR GAME
 - BOARD_X and BOARD_Y determine the board's position on the screen, centering it horizontally and placing it 150 pixels from the top of the window.
 
 ## Colours
-BG sets the dark background colour of the game window.
-PANEL is the colour of the top information panel that displays the title, turn indicator, and scores.
-BOARD_BLUE is used to draw the Connect Four board.
-RED is the colour of Player 1's counters and text.
-YELLOW is the colour of Player 2's counters and text.
-WHITE is used for most text and other light elements.
-BLACK is used for the empty spaces (holes) in the board.
-GREEN is the normal colour of the Reset Game button.
-GREEN_HOVER is the lighter green shown when the mouse is hovering over the button.
+- BG sets the dark background colour of the game window.
+- PANEL is the colour of the top information panel that displays the title, turn indicator, and scores.
+- BOARD_BLUE is used to draw the Connect Four board.
+- RED is the colour of Player 1's counters and text.
+- YELLOW is the colour of Player 2's counters and text.
+- WHITE is used for most text and other light elements.
+- BLACK is used for the empty spaces (holes) in the board.
+- GREEN is the normal colour of the Reset Game button.
+- GREEN_HOVER is the lighter green shown when the mouse is hovering over the button.
 
 ## Windows
-pygame.display.set_mode((WIDTH, HEIGHT)) creates the game window using the width and height defined earlier (900 × 700 pixels). The variable screen represents the window that everything is drawn onto.
-pygame.display.set_caption("Connect Four") sets the title shown in the window's title bar to "Connect Four".
-pygame.time.Clock() creates a clock object that controls the game's frame rate, helping it run smoothly at the specified 60 FPS.
-pygame.font.SysFont("arial", 42, bold=True) creates a large, bold Arial font for the game's title.
-ui_font creates a medium-sized font used for interface text, such as the current player's turn.
-small_font creates a smaller font used for information such as the move counter, score, and instructions.
+- pygame.display.set_mode((WIDTH, HEIGHT)) creates the game window using the width and height defined earlier (900 × 700 pixels).
+- The variable screen represents the window that everything is drawn onto.
+- pygame.display.set_caption("Connect Four") sets the title shown in the window's title bar to "Connect Four".
+- pygame.time.Clock() creates a clock object that controls the game's frame rate, helping it run smoothly at the specified 60 FPS.
+- pygame.font.SysFont("arial", 42, bold=True) creates a large, bold Arial font for the game's title.
+- ui_font creates a medium-sized font used for interface text, such as the current player's turn.
+- small_font creates a smaller font used for information such as the move counter, score, and instructions.
 
 ## Game State
 board = [[0 for _ in range(COLS)] for _ in range(ROWS)] creates a 6 × 7 two-dimensional list representing the game board. Each position starts with the value 0, meaning it is empty.
