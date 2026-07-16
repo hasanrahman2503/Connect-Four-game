@@ -72,14 +72,14 @@ CONNECT FOUR GAME
 - small_font creates a smaller font used for information such as the move counter, score, and instructions.
 
 ## Game State
-board = [[0 for _ in range(COLS)] for _ in range(ROWS)] creates a 6 × 7 two-dimensional list representing the game board. Each position starts with the value 0, meaning it is empty.
+- board = [[0 for _ in range(COLS)] for _ in range(ROWS)] creates a 6 × 7 two-dimensional list representing the game board. Each position starts with the value 0, meaning it is empty.
 0 = Empty space
 1 = Red player's counter
 2 = Yellow player's counter
-current_player = 1 sets the first turn to Player 1 (Red).
-winner = None stores the winner of the game. It remains None until a player connects four counters.
-game_over = False is a Boolean variable that indicates whether the game has finished. It changes to True when a player wins or the board is full.
-moves = 0 counts how many counters have been placed. This is used to detect when the board is full and the game ends in a draw.
-red_wins = 0 keeps track of how many games the Red player has won.
-yellow_wins = 0 keeps track of how many games the Yellow player has won.
-draws = 0 records the number of games that end without a winner.
+- current_player = 1 sets the first turn to Player 1 (Red).
+- winner = None stores the winner of the game. It remains None until a player connects four counters.
+- game_over = False is a Boolean variable that indicates whether the game has finished. It changes to True when a player wins or the board is full.
+- moves = 0 counts how many counters have been placed. This is used to detect when the board is full and the game ends in a draw.
+- red_wins = 0 keeps track of how many games the Red player has won.
+- yellow_wins = 0 keeps track of how many games the Yellow player has won.
+- draws = 0 records the number of games that end without a winner.
