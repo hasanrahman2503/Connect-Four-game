@@ -1,6 +1,5 @@
 ## Flow Chart
 
-CONNECT FOUR GAME
 ```
 ├── Initialisation
 │
