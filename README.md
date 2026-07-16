@@ -113,4 +113,4 @@ If any of these conditions are not met, the method returns False. This allows th
 ```python
 reset_button = Button(WIDTH // 2 - 80, HEIGHT - 80, 160, 50, "Reset Game")
 ```
-This line creates a Button object called reset_button. The button is positioned near the bottom centre of the game window, has a width of 160 pixels and a height of 50 pixels, and displays the text "Reset Game". The button is used to restart the game when clicked.
+This line creates a Button object called reset_button. <br> The button is positioned near the bottom centre of the game window, has a width of 160 pixels and a height of 50 pixels, and displays the text "Reset Game". The button is used to restart the game when clicked.
