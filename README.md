@@ -91,3 +91,26 @@ The Button class creates a clickable button for the game. It stores the buttonâ€
 ## __init__() Method
 
 The __init__() method is the constructor for the Button class. It runs automatically whenever a new button object is created. Its purpose is to initialise the button's properties, including its position (x, y), size (w, h), and display text. It also creates a pygame.Rect object, which is used for drawing the button and detecting mouse interactions.
+
+## draw() Method
+
+The draw() method displays the button on the screen. First, it gets the current mouse position using pygame.mouse.get_pos(). It then checks whether the mouse is hovering over the button using self.rect.collidepoint(mouse). If the mouse is over the button, the button is coloured GREEN_HOVER; otherwise, it remains GREEN.
+
+The method then draws the button as a rectangle with rounded corners using pygame.draw.rect(). Finally, it renders the button text, centres it within the button, and displays it on the screen using surface.blit().
+
+## clicked() Method
+
+The clicked() method checks whether the button has been clicked. It returns True only when three conditions are met:
+
+- The event is a mouse button press (pygame.MOUSEBUTTONDOWN).
+- The left mouse button is used (event.button == 1).
+- The mouse click occurs inside the button's rectangular area (self.rect.collidepoint(event.pos)).
+
+If any of these conditions are not met, the method returns False. This allows the program to detect when the user clicks the button and perform an action, such as resetting the game.
+
+## Reset Button Creation
+
+```python
+reset_button = Button(WIDTH // 2 - 80, HEIGHT - 80, 160, 50, "Reset Game")
+```
+This line creates a Button object called reset_button. The button is positioned near the bottom centre of the game window, has a width of 160 pixels and a height of 50 pixels, and displays the text "Reset Game". The button is used to restart the game when clicked.
