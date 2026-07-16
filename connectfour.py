@@ -258,7 +258,7 @@ def draw_hover_piece():
             screen,
             color,
             (mouse_x, BOARD_Y - 40),
-            CELL_SIZE // 2 - 8,
+            CELL_SIZE // 2 - 6,
         )
 
 
